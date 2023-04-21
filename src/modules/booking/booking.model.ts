@@ -30,7 +30,7 @@ export class Booking {
     raw({
       fullName: { type: String },
       email: { type: String },
-    }),
+    })
   )
   user: IUser;
 }

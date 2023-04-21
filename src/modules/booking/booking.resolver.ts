@@ -17,14 +17,14 @@ export class BookingResolver {
     @Args({ name: 'bookingTitle', type: () => String }) title: string,
     @Args({ name: 'startDate', type: () => String }) start: string,
     @Args({ name: 'endDate', type: () => String }) end: string,
-    @CurrentUser() user,
+    @CurrentUser() user
   ) {
     return this.bookingService.newBooking(
       title,
       start,
       end,
       user.name,
-      user.email,
+      user.email
     );
   }
 
@@ -34,21 +34,21 @@ export class BookingResolver {
     @Args({ name: 'start', type: () => String }) start: string,
     @Args({ name: 'end', type: () => String }) end: string,
     @Args({ name: 'title', type: () => String }) title: string,
-    @CurrentUser() user,
+    @CurrentUser() user
   ) {
     return this.bookingService.updateBooking(
       booking_id,
       start,
       end,
       title,
-      user.email,
+      user.email
     );
   }
 
   @Mutation((returns) => Booking, { name: 'delete_booking', nullable: true })
   async deleteBooking(
     @Args({ name: 'booking_id', type: () => String }) booking_id: string,
-    @CurrentUser() user,
+    @CurrentUser() user
   ) {
     return this.bookingService.deleteBooking(booking_id, user.email);
   }

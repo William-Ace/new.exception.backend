@@ -7,7 +7,7 @@ import { Model } from 'mongoose';
 export class BookingService {
   constructor(
     @InjectModel(Booking.name)
-    private bookingModel: Model<BookingDocument>,
+    private bookingModel: Model<BookingDocument>
   ) {}
 
   async newBooking(
@@ -15,7 +15,7 @@ export class BookingService {
     start: string,
     end: string,
     user_name: string,
-    user_email: string,
+    user_email: string
   ): Promise<Booking> {
     const newBooking = await new this.bookingModel({
       bookingTitle: title,
@@ -31,7 +31,7 @@ export class BookingService {
     startDate: string,
     endDate: string,
     bookingTitle: string,
-    user_email: string,
+    user_email: string
   ): Promise<Booking> {
     const updatedBooking = await this.bookingModel.findByIdAndUpdate(
       booking_id,
@@ -39,14 +39,14 @@ export class BookingService {
         bookingTitle,
         startDate,
         endDate,
-      },
+      }
     );
     return updatedBooking;
   }
 
   async deleteBooking(
     booking_id: string,
-    user_email: string,
+    user_email: string
   ): Promise<Booking> {
     const result = await this.bookingModel.findByIdAndDelete(booking_id);
     return result;
