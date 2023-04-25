@@ -4,6 +4,7 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
   const config = new DocumentBuilder()
     .setTitle('Exception example')
     .setDescription('The exception API description')
@@ -12,7 +13,7 @@ async function bootstrap() {
     .build();
   const document = SwaggerModule.createDocument(app, config);
 
-  SwaggerModule.setup('calendar', app, document);
-  await app.listen(1934);
+  SwaggerModule.setup('auth/register', app, document);
+  await app.listen(5000);
 }
 bootstrap();
