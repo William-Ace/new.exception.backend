@@ -1,0 +1,30 @@
+import { Auth, AuthDocument } from './auth.model';
+import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+
+@Injectable()
+export class AuthService {
+  constructor(
+    @InjectModel(Auth.name)
+    private authModel: Model<AuthDocument>
+  ) {}
+
+  async register(email: string, password: string, name: string): Promise<Auth> {
+    const user = await this.authModel.findOne({ email });
+
+    if (user !== null) return null;
+
+    const newUser = await new this.authModel({
+      email,
+      password,
+      name,
+    });
+
+    return newUser.save();
+  }
+
+  async findAll(email: string): Promise<Auth[]> {
+    return this.authModel.find().where({ email }).exec();
+  }
+}
